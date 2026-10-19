@@ -108,7 +108,18 @@ input{width:100%;padding:12px;border:1px solid #ccd2df;border-radius:8px;font-si
 
   try {
     if (!window.supabase) throw new Error("Supabase library did not load.");
-    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY,
+  {
+    auth: {
+      flowType: "implicit",
+      detectSessionInUrl: true,
+      persistSession: true,
+      autoRefreshToken: true
+    }
+  }
+);
   } catch (error) {
     showMessage(error.message, true);
   }
