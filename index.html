@@ -1,253 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Career Execution Agent</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  console.log("Page JavaScript is loading");
-</script>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh; display: grid;
-      place-items: center; padding: 20px;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e0eaff, #f5e8ff);
-    }
-    .card {
-      background: white; width: 100%; max-width: 420px;
-      padding: 28px; border-radius: 18px;
-      box-shadow: 0 10px 35px #24304b20;
-    }
-    h1 { font-size: 24px; text-align: center; color: #293b72; }
-    p { color: #626b7b; line-height: 1.5; text-align: center; }
-    .tabs { display: flex; gap: 5px; margin: 22px 0; }
-    .tabs button {
-      flex: 1; padding: 10px 4px; background: #eef1f8;
-      color: #34405a; font-size: 13px;
-    }
-    label { display: block; margin: 14px 0 6px; font-weight: bold; }
-    input {
-      width: 100%; padding: 12px; border: 1px solid #ccd2df;
-      border-radius: 8px; font-size: 16px;
-    }
-    button {
-      border: 0; border-radius: 8px; padding: 13px;
-      cursor: pointer; font-size: 15px;
-    }
-    .primary { width: 100%; background: #405de6; color: white; margin-top: 18px; }
-    .active { background: #dce4ff !important; font-weight: bold; }
-    .message { font-size: 14px; overflow-wrap: anywhere; }
-    .hidden { display: none; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Career Execution Agent</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;font-family:Arial,sans-serif;background:linear-gradient(135deg,#e0eaff,#f5e8ff)}
+.card{background:white;width:100%;max-width:420px;padding:28px;border-radius:18px;box-shadow:0 10px 35px #24304b20}
+h1{text-align:center;font-size:24px;color:#293b72}
+p{text-align:center;color:#626b7b;line-height:1.5}
+.tabs{display:flex;gap:5px;margin:22px 0}
+button{border:0;border-radius:8px;padding:12px;cursor:pointer;font-size:14px}
+.tabs button{flex:1;background:#eef1f8;color:#34405a}
+.tabs button.active{background:#dce4ff;font-weight:bold}
+label{display:block;margin:14px 0 6px;font-weight:bold}
+input{width:100%;padding:12px;border:1px solid #ccd2df;border-radius:8px;font-size:16px}
+.primary{width:100%;background:#405de6;color:white;margin-top:18px}
+.hidden{display:none!important}
+.message{font-size:14px;overflow-wrap:anywhere}
+</style>
 </head>
 <body>
-  <main class="card">
-    <h1>🎯 AI Career Execution Agent</h1>
-    <p>Sign in to build your personalized career roadmap.</p>
+<main class="card">
+<h1>🎯 AI Career Execution Agent</h1>
+<p>Sign in to build your personalized career roadmap.</p>
 
-    <div class="tabs" id="tabs">
-      <button class="active" data-page="login">Login</button>
-      <button data-page="register">Register</button>
-      <button data-page="forgot">Forgot Password</button>
-    </div>
+<div class="tabs" id="tabs">
+<button type="button" class="active" data-page="login">Login</button>
+<button type="button" data-page="register">Register</button>
+<button type="button" data-page="forgot">Forgot Password</button>
+</div>
 
-    <section id="login">
-      <form id="loginForm">
-        <label for="loginEmail">Email address</label>
-        <input id="loginEmail" type="email" autocomplete="email" required>
-        <label for="loginPassword">Password</label>
-        <input id="loginPassword" type="password" autocomplete="current-password" required>
-        <button class="primary">Login</button>
-      </form>
-    </section>
+<section id="login">
+<form id="loginForm">
+<label>Email address</label>
+<input id="loginEmail" type="email" autocomplete="email" required>
+<label>Password</label>
+<input id="loginPassword" type="password" autocomplete="current-password" required>
+<button class="primary" type="submit">Login</button>
+</form>
+</section>
 
-    <section id="register" class="hidden">
-      <form id="registerForm">
-        <label for="regEmail">Email address</label>
-        <input id="regEmail" type="email" autocomplete="email" required>
-        <label for="regPassword">Create password (at least 6 characters)</label>
-        <input id="regPassword" type="password" minlength="6" autocomplete="new-password" required>
-        <button class="primary">Create account</button>
-      </form>
-    </section>
+<section id="register" class="hidden">
+<form id="registerForm">
+<label>Email address</label>
+<input id="regEmail" type="email" autocomplete="email" required>
+<label>Create password (at least 6 characters)</label>
+<input id="regPassword" type="password" minlength="6" autocomplete="new-password" required>
+<button class="primary" type="submit">Create account</button>
+</form>
+</section>
 
-    <section id="forgot" class="hidden">
-      <form id="forgotForm">
-        <label for="forgotEmail">Registered email</label>
-        <input id="forgotEmail" type="email" autocomplete="email" required>
-        <button class="primary">Send Reset Link</button>
-      </form>
-    </section>
+<section id="forgot" class="hidden">
+<form id="forgotForm">
+<label>Registered email</label>
+<input id="forgotEmail" type="email" autocomplete="email" required>
+<button class="primary" type="submit">Send Reset Link</button>
+</form>
+</section>
 
-    <section id="reset" class="hidden">
-      <form id="resetForm">
-        <label for="newPassword">New password</label>
-        <input id="newPassword" type="password" minlength="6" autocomplete="new-password" required>
-        <label for="confirmPassword">Confirm new password</label>
-        <input id="confirmPassword" type="password" minlength="6" autocomplete="new-password" required>
-        <button class="primary">Save New Password</button>
-      </form>
-    </section>
+<section id="reset" class="hidden">
+<form id="resetForm">
+<label>New password</label>
+<input id="newPassword" type="password" minlength="6" required>
+<label>Confirm new password</label>
+<input id="confirmPassword" type="password" minlength="6" required>
+<button class="primary" type="submit">Save New Password</button>
+</form>
+</section>
 
-    <p id="message" class="message" role="status" aria-live="polite"></p>
-  </main>
+<p id="message" class="message" role="status"></p>
+</main>
 
-  <script>
-    // Replace both placeholders with your Supabase project values.
-    const SUPABASE_URL = "https://qokwutbjzcouppalffqk.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_OgBSJx6av6Ba0sYPEY1jag_3PfCODN1";
+<script>
+(() => {
+  const SUPABASE_URL = "https://qokwutbjzcouppalffqk.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_OgBSJx6av6Ba0sYPEY1jag_3PfCODN1";
 
-    const ready = !SUPABASE_URL.includes("YOUR_") &&
-                  !SUPABASE_ANON_KEY.includes("YOUR_");
+  const msg = document.getElementById("message");
+  const tabs = document.getElementById("tabs");
+  let client = null;
+  let recoveryMode = false;
 
-    let supabase = null;
-    if (ready) {
-      supabase = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
-    }
+  function showMessage(text, error = false) {
+    msg.textContent = text;
+    msg.style.color = error ? "#b42318" : "#187344";
+  }
 
-    const message = document.getElementById("message");
-    let recoveryMode = false;
-
-    function showMessage(text, error = false) {
-      message.textContent = text;
-      message.style.color = error ? "#b42318" : "#187344";
-    }
-
-    function showPage(page) {
-      ["login", "register", "forgot", "reset"].forEach(id => {
-        document.getElementById(id).classList.toggle("hidden", id !== page);
-      });
-      document.getElementById("tabs").classList.toggle("hidden", page === "reset");
-      document.querySelectorAll("[data-page]").forEach(button => {
-        button.classList.toggle("active", button.dataset.page === page);
-      });
-      showMessage("");
-    }
-
+  function showPage(page) {
+    ["login", "register", "forgot", "reset"].forEach(id => {
+      document.getElementById(id).classList.toggle("hidden", id !== page);
+    });
+    tabs.classList.toggle("hidden", page === "reset");
     document.querySelectorAll("[data-page]").forEach(button => {
-      button.addEventListener("click", () => showPage(button.dataset.page));
+      button.classList.toggle("active", button.dataset.page === page);
+    });
+    showMessage("");
+  }
+
+  // Tab switching works independently of Supabase.
+  tabs.addEventListener("click", event => {
+    const button = event.target.closest("button[data-page]");
+    if (button) showPage(button.dataset.page);
+  });
+
+  try {
+    if (!window.supabase) throw new Error("Supabase library did not load.");
+    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (error) {
+    showMessage(error.message, true);
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!client) return showMessage("Connection is not ready. Refresh and try again.", true);
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const { error } = await client.auth.signInWithPassword({ email, password });
+
+    showMessage(error ? "Login failed: " + error.message :
+      "Login successful! Authentication is complete. Dashboard integration is still needed.", !!error);
+  });
+
+  document.getElementById("registerForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!client) return showMessage("Connection is not ready. Refresh and try again.", true);
+
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value;
+    const { data, error } = await client.auth.signUp({
+      email, password,
+      options: { emailRedirectTo: window.location.origin + window.location.pathname }
     });
 
-    function checkConfigured() {
-      if (!ready || !supabase) {
-        showMessage("Setup needed: add your Supabase project URL and public anon/publishable key in index.html.", true);
-        return false;
-      }
-      return true;
+    if (error) showMessage("Registration failed: " + error.message, true);
+    else if (!data.session) showMessage("Check your email for the account confirmation link.");
+    else showMessage("Account created successfully!");
+  });
+
+  document.getElementById("forgotForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!client) return showMessage("Connection is not ready. Refresh and try again.", true);
+
+    const email = document.getElementById("forgotEmail").value.trim();
+    const redirectTo = window.location.origin + window.location.pathname;
+    const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo });
+
+    showMessage(error ? "Could not send reset email: " + error.message :
+      "If the account exists, a reset email will be sent. Open it on this website.", !!error);
+  });
+
+  document.getElementById("resetForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!client) return showMessage("Connection is not ready.", true);
+
+    const password = document.getElementById("newPassword").value;
+    const confirm = document.getElementById("confirmPassword").value;
+    if (password.length < 6) return showMessage("Use at least 6 characters.", true);
+    if (password !== confirm) return showMessage("Passwords do not match.", true);
+    if (!recoveryMode) return showMessage("Recovery session not found. Request a new reset link.", true);
+
+    const { error } = await client.auth.updateUser({ password });
+    if (error) return showMessage("Could not update password: " + error.message, true);
+
+    recoveryMode = false;
+    history.replaceState(null, "", window.location.pathname);
+    showPage("login");
+    showMessage("Password updated. You can now log in.");
+  });
+
+  client?.auth.onAuthStateChange((event) => {
+    if (event === "PASSWORD_RECOVERY") {
+      recoveryMode = true;
+      showPage("reset");
+      showMessage("Enter your new password below.");
     }
+  });
 
-    document.getElementById("loginForm").addEventListener("submit", async event => {
-      event.preventDefault();
-      if (!checkConfigured()) return;
-
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value;
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        showMessage("Login failed: " + error.message, true);
-        return;
-      }
-      showMessage("Login successful! Your account is authenticated.");
-      // Dashboard integration will be added separately.
-    });
-
-    document.getElementById("registerForm").addEventListener("submit", async event => {
-      event.preventDefault();
-      if (!checkConfigured()) return;
-
-      const email = document.getElementById("regEmail").value.trim();
-      const password = document.getElementById("regPassword").value;
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: window.location.origin + window.location.pathname }
-      });
-
-      if (error) {
-        showMessage("Registration failed: " + error.message, true);
-      } else if (!data.session) {
-        showMessage("Registration submitted. Check your email to confirm your account.");
-      } else {
-        showMessage("Account created successfully!");
-      }
-    });
-
-    document.getElementById("forgotForm").addEventListener("submit", async event => {
-      event.preventDefault();
-      if (!checkConfigured()) return;
-
-      const email = document.getElementById("forgotEmail").value.trim();
-      const redirectTo = window.location.origin + window.location.pathname;
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo
-      });
-
-      if (error) {
-        showMessage("Could not send reset email: " + error.message, true);
-      } else {
-        showMessage("If the account exists, a reset email will be sent. Open the link in this same site.");
-      }
-    });
-
-    document.getElementById("resetForm").addEventListener("submit", async event => {
-      event.preventDefault();
-      if (!checkConfigured()) return;
-
-      const password = document.getElementById("newPassword").value;
-      const confirm = document.getElementById("confirmPassword").value;
-
-      if (password.length < 6) {
-        showMessage("Use at least 6 characters.", true);
-        return;
-      }
-      if (password !== confirm) {
-        showMessage("The passwords do not match.", true);
-        return;
-      }
-      if (!recoveryMode) {
-        showMessage("Recovery session not found. Request a new reset link.", true);
-        return;
-      }
-
-      const { error } = await supabase.auth.updateUser({ password });
-      if (error) {
-        showMessage("Could not update password: " + error.message, true);
-      } else {
-        recoveryMode = false;
-        history.replaceState(null, "", window.location.pathname);
-        showPage("login");
-        showMessage("Password updated! You can now log in.");
-      }
-    });
-
-    if (ready) {
-      supabase.auth.onAuthStateChange((event, session) => {
-        if (event === "PASSWORD_RECOVERY") {
-          recoveryMode = true;
-          showPage("reset");
-          showMessage("Enter your new password below.");
-        }
-      });
-
-      (async () => {
-        const { data, error } = await supabase.auth.getSession();
-        if (error) {
-          showMessage("Could not read recovery session. Request a new reset link.", true);
-          return;
-        }
-        if (data.session && window.location.hash.includes("type=recovery")) {
-          recoveryMode = true;
-          showPage("reset");
-          showMessage("Enter your new password below.");
-        }
-      })();
+  // Handle recovery links that contain a PKCE code.
+  (async () => {
+    if (!client) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("code")) {
+      const { error } = await client.auth.exchangeCodeForSession(params.get("code"));
+      if (error) showMessage("Recovery link error: " + error.message, true);
     }
-  </script>
+  })();
+})();
+</script>
 </body>
 </html>
